@@ -1,9 +1,9 @@
 package com.codecool.app.httphandlers;
 
+import com.codecool.app.cookies.CookieHelper;
 import com.codecool.app.dao.DAOAccounts;
 import com.codecool.app.login.AccessLevel;
 import com.codecool.app.login.Account;
-import com.codecool.app.cookies.CookieHelper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -41,7 +41,6 @@ public class LoginHandler implements HttpHandler {
         String response = "";
         ClassLoader classLoader = getClass().getClassLoader();
         File loginPage = new File(classLoader.getResource(LOGIN_PAGE_URL).getFile());
-
         try (Scanner scanner = new Scanner(loginPage)){
             while (scanner.hasNextLine()){
                 String line = scanner.nextLine();
@@ -60,11 +59,9 @@ public class LoginHandler implements HttpHandler {
         InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
         BufferedReader br = new BufferedReader(isr);
         String formData = br.readLine();
-        System.out.println(formData);
         Map inputs = parseFormData(formData);
         String password = (String) inputs.get("password");
         String nick = (String) inputs.get("nick");
-        System.out.println(nick + " " + password);
         try {
             Account account = daoAccounts.getAccountByNicknameAndPassword(nick, password);
             String sessionId = UUID.randomUUID().toString();
@@ -77,7 +74,6 @@ public class LoginHandler implements HttpHandler {
             } else if (account.getAccessLevel() == AccessLevel.MENTOR){
                 httpExchange.getResponseHeaders().add("Location", "/mentor/profile");
             }
-
 
         } catch (NoSuchElementException e) {
             httpExchange.getResponseHeaders().add("Location", "/");
