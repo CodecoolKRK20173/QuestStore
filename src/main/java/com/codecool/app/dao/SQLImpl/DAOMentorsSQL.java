@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DAOMentorsSQL implements DAOMentors {
-    private Connection connection;
+    public Connection connection; //zmienione na public do testow
 
     public DAOMentorsSQL() {
         this.connection = SQLConnector.getConnection();

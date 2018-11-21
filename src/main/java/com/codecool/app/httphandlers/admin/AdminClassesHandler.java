@@ -11,8 +11,6 @@ import org.jtwig.JtwigTemplate;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpCookie;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Optional;
 
 public class AdminClassesHandler implements HttpHandler {
@@ -33,19 +31,8 @@ public class AdminClassesHandler implements HttpHandler {
             String sessionId = cookie.get().getValue();
             sessionId = sessionId.replace("\"", "");
 
-            if(appDAOs.getDAOAccounts().isValidUserType( sessionId, "ADMIN")) {
-                JtwigTemplate template = JtwigTemplate.classpathTemplate(templatesPaths.ADMIN_CLASSES);
-                JtwigModel model = JtwigModel.newModel();
-
-                model.with("userName", appDAOs.getDAOAccounts().getAccountBySessionId(sessionId).getNickname());
-                model.with("classes", appDAOs.getDAOClasses().getAllClasses());
-
-                String response = template.render(model);
-
-                httpExchange.sendResponseHeaders(200, response.length());
-                OutputStream os = httpExchange.getResponseBody();
-                os.write(response.getBytes());
-                os.close();
+            if(appDAOs.getDAOAccounts().isValidUserType(sessionId, "ADMIN")) {
+                writeResponse(httpExchange, sessionId);
             } else {
                 System.out.println("Unauthorized request for admin");
                 httpExchange.getResponseHeaders().add("Location", "/");
@@ -53,5 +40,23 @@ public class AdminClassesHandler implements HttpHandler {
 
             }
         }
+    }
+
+    private void writeResponse(HttpExchange httpExchange, String sessionId) throws IOException {
+        JtwigTemplate template = JtwigTemplate.classpathTemplate(templatesPaths.ADMIN_CLASSES);
+        JtwigModel model = createJtwigModel(sessionId);
+        String response = template.render(model);
+        httpExchange.sendResponseHeaders(200, response.length());
+        OutputStream os = httpExchange.getResponseBody();
+        os.write(response.getBytes());
+        os.close();
+    }
+
+    private JtwigModel createJtwigModel(String sessionId) {
+        JtwigModel model = JtwigModel.newModel();
+        model.with("userName", appDAOs.getDAOAccounts().getAccountBySessionId(sessionId).getNickname());
+
+        model.with("classes", appDAOs.getDAOClasses().getAllClasses());
+        return model;
     }
 }
