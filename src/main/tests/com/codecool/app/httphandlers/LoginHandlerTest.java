@@ -54,7 +54,7 @@ class LoginHandlerTest {
     }
 
     @Test
-    void testHandleRequestPostShouldSetLocationHeaderToLoginPageOnWrongCredentials() throws IOException{
+    void testHandlePostRequestShouldSetLocationHeaderToLoginPageOnWrongCredentials() throws IOException{
         when(daoAccounts.getAccountByNicknameAndPassword(testUsername,testPassword)).thenThrow(new NoSuchElementException(new ErrorMessages().getUSER_NOT_REGISTERED_MESSAGE()));
         HttpExchange httpExchange = new HttpExchangeHelper("POST", testPassword, testUsername);
 
@@ -69,7 +69,7 @@ class LoginHandlerTest {
 
 
     @Test
-    void testHandleRequestPostShouldSetLocationHeaderToAdminPageOnGoodCredentials() throws IOException{
+    void testHandlePostRequestShouldSetLocationHeaderToAdminPageOnGoodCredentials() throws IOException{
         Account testAccount = new Account();
         testAccount.setAccessLevel(AccessLevel.ADMIN);
         when(daoAccounts.getAccountByNicknameAndPassword(testUsername,testPassword)).thenReturn(testAccount);
