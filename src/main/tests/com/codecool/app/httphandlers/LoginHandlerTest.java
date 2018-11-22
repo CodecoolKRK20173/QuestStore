@@ -5,20 +5,13 @@ import com.codecool.app.dao.DAOAccounts;
 import com.codecool.app.login.AccessLevel;
 import com.codecool.app.login.Account;
 import com.codecool.app.messages.ErrorMessages;
-import com.sun.net.httpserver.Headers;
-import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpPrincipal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.InetSocketAddress;
-import java.net.URI;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -41,7 +34,7 @@ class LoginHandlerTest {
     private DAOAccounts daoAccounts;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    void setUp(){
         MockitoAnnotations.initMocks(this);
         CookieHelper cookieHelper = new CookieHelper("sessionId");
         loginHandler = new LoginHandler(daoAccounts, cookieHelper);
