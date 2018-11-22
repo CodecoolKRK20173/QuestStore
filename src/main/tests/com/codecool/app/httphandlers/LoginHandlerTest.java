@@ -41,6 +41,10 @@ class LoginHandlerTest {
         loginHandler = new LoginHandler(daoAccounts, cookieHelper);
     }
 
+
+    /*
+    This test fails on present implementation, but bug it shows won't occur on runtime. Added to show design flaw.
+     */
     @Test
     void testHandlePostRequestShouldPassOnRetrievingEmptyAccountFromDataBase() throws IOException{
         when(daoAccounts.getAccountByNicknameAndPassword(testUsername,testPassword)).thenReturn(new Account());
