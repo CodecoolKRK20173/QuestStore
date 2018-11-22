@@ -20,7 +20,6 @@ public class LoginHandler implements HttpHandler {
     public LoginHandler(DAOAccounts daoAccounts, CookieHelper cookieHelper) {
         this.daoAccounts = daoAccounts;
         this.cookieHelper = cookieHelper;
-        this.cookieHelper = cookieHelper;
     }
 
     @Override
