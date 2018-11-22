@@ -42,9 +42,7 @@ class LoginHandlerTest {
     }
 
 
-    /*
-    This test fails on present implementation, but bug it shows won't occur on runtime. Added to show design flaw.
-     */
+
     @Test
     void testHandlePostRequestShouldPassOnRetrievingEmptyAccountFromDataBase() throws IOException{
         when(daoAccounts.getAccountByNicknameAndPassword(testUsername,testPassword)).thenReturn(new Account());
@@ -52,7 +50,7 @@ class LoginHandlerTest {
 
         loginHandler.handle(httpExchange);
 
-        assertTrue(httpExchange.getResponseHeaders().containsKey("Location"));
+        assertTrue(httpExchange.getResponseHeaders().containsKey("Location"),"This test fails on present implementation, but bug it shows won't occur on runtime. Added to show design flaw." );
     }
 
     @Test
