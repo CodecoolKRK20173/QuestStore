@@ -16,6 +16,7 @@ import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 class LoginHandlerTest {
@@ -25,8 +26,8 @@ class LoginHandlerTest {
     private String adminPageAdress = "/admin/profile";
     private int standardResponseCode = 200;
     private int redirectResponseCode = 303;
-    private String redirectLocation;
-    private int responseCode;
+    private String returnedRedirectLocation;
+    private int returnedResponseCode;
     private String testUsername = "tName";
     private String testPassword = "tPass";
 
@@ -41,6 +42,16 @@ class LoginHandlerTest {
     }
 
     @Test
+    void testHandlePostRequestShouldPassOnRetrievingEmptyAccountFromDataBase() throws IOException{
+        when(daoAccounts.getAccountByNicknameAndPassword(testUsername,testPassword)).thenReturn(new Account());
+        HttpExchange httpExchange = new HttpExchangeHelper("POST", testPassword, testUsername);
+
+        loginHandler.handle(httpExchange);
+
+        assertTrue(httpExchange.getResponseHeaders().containsKey("Location"));
+    }
+
+    @Test
     void testHandleRequestPostShouldSetLocationHeaderToLoginPageOnWrongCredentials() throws IOException{
         when(daoAccounts.getAccountByNicknameAndPassword(testUsername,testPassword)).thenThrow(new NoSuchElementException(new ErrorMessages().getUSER_NOT_REGISTERED_MESSAGE()));
         HttpExchange httpExchange = new HttpExchangeHelper("POST", testPassword, testUsername);
@@ -49,8 +60,8 @@ class LoginHandlerTest {
         prepareAssertParameters(httpExchange);
 
         assertAll(
-                ()->assertEquals(loginPageAdress, redirectLocation),
-                ()->assertEquals(redirectResponseCode, responseCode)
+                ()->assertEquals(loginPageAdress, returnedRedirectLocation),
+                ()->assertEquals(redirectResponseCode, returnedResponseCode)
         );
     }
 
@@ -66,8 +77,8 @@ class LoginHandlerTest {
         prepareAssertParameters(httpExchange);
 
         assertAll(
-                ()->assertEquals(adminPageAdress, redirectLocation),
-                ()-> assertEquals(redirectResponseCode, responseCode)
+                ()->assertEquals(adminPageAdress, returnedRedirectLocation),
+                ()-> assertEquals(redirectResponseCode, returnedResponseCode)
         );
     }
 
@@ -81,7 +92,7 @@ class LoginHandlerTest {
     }
 
     private void prepareAssertParameters(HttpExchange httpExchange) {
-        redirectLocation = httpExchange.getResponseHeaders().get("Location").get(0);
-        responseCode = httpExchange.getResponseCode();
+        returnedRedirectLocation = httpExchange.getResponseHeaders().get("Location").get(0);
+        returnedResponseCode = httpExchange.getResponseCode();
     }
 }
