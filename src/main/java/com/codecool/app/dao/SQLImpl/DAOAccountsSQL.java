@@ -49,7 +49,7 @@ public class DAOAccountsSQL implements DAOAccounts {
         } catch (SQLException e){
             e.printStackTrace();
         }
-        throw new NoSuchElementException(new ErrorMessages().getUSER_NOT_REGISTERED_MESSAGE());
+        return new Account();
     }
 
     @Override
