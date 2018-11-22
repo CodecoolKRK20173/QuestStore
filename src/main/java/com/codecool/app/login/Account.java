@@ -7,7 +7,9 @@ public class Account {
     private AccessLevel accessLevel;
     private String sessionID;
 
-    public Account(){}
+    public Account(){
+        accessLevel = AccessLevel.NOBODY;
+    }
 
     public Account(String nickname, String password){
         this.nickname = nickname;
