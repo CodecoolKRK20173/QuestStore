@@ -57,14 +57,18 @@ class LoginHandlerTest {
     }
 
     @Test
-    void testHandlePostRequestShouldPassOnRetrievingEmptyAccountFromDataBase() throws IOException{
-        when(daoAccounts.getAccountByNicknameAndPassword(testUsername,testPassword)).thenReturn(new Account(testPassword, testUsername));
+    void testHandlePostRequestShouldRedirectToLoginPageEmptyAccountFromDataBase() throws IOException{
+        when(daoAccounts.getAccountByNicknameAndPassword(testUsername,testPassword)).thenReturn(new Account());
 
         loginHandler.handle(postingHelper);
+        prepareAssertParameters(postingHelper);
 
-        assertTrue(postingHelper.getResponseHeaders().containsKey("Location"));
+        assertAll(
+                ()->assertEquals(loginPageAdress, returnedRedirectLocation),
+                ()-> assertEquals(redirectResponseCode, returnedResponseCode)
+        );
+
     }
-
 
 
     @Test

@@ -77,7 +77,6 @@ public class LoginHandler implements HttpHandler {
         else{
             httpExchange.getResponseHeaders().add("Location", "/");
         }
-
         httpExchange.sendResponseHeaders(303, 0);
     }
 
