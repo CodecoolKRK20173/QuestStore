@@ -13,9 +13,6 @@ import static org.mockito.Mockito.when;
 
 public class TestAdminDaoSQL {
 
-
-
-
     @Test
     public void testGetMentorIsNotNull() throws SQLException {
         DAOMentorsSQL testAdminDaoSQL = new DAOMentorsSQL();
@@ -31,6 +28,8 @@ public class TestAdminDaoSQL {
         when(resultSet.getString(Mockito.anyString())).thenReturn("test@email.com");
         Assert.assertNotEquals(null, testAdminDaoSQL.getMentor(1));
     }
+
+
     @Test
     public void testSQLException() {
         DAOMentorsSQL testAdminDaoSQL = new DAOMentorsSQL();
