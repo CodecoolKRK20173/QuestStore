@@ -60,26 +60,23 @@ public class LoginHandler implements HttpHandler {
         InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
         BufferedReader br = new BufferedReader(isr);
         String formData = br.readLine();
-        System.out.println(formData);
         Map inputs = parseFormData(formData);
         String password = (String) inputs.get("password");
         String nick = (String) inputs.get("nick");
-        System.out.println(nick + " " + password);
-        try {
-            Account account = daoAccounts.getAccountByNicknameAndPassword(nick, password);
+        Account account = daoAccounts.getAccountByNicknameAndPassword(nick, password);
+        if(account.getAccessLevel() != AccessLevel.NOBODY) {
             String sessionId = UUID.randomUUID().toString();
             account.setSessionID(sessionId);
             daoAccounts.updateAccount(account.getId(), account);
             Optional<HttpCookie> cookie = Optional.of(new HttpCookie(cookieHelper.getSESSION_COOKIE_NAME(), sessionId));
             httpExchange.getResponseHeaders().add("Set-Cookie", cookie.get().toString());
-            if (account.getAccessLevel() == AccessLevel.ADMIN){
+            if (account.getAccessLevel() == AccessLevel.ADMIN) {
                 httpExchange.getResponseHeaders().add("Location", "/admin/profile");
-            } else if (account.getAccessLevel() == AccessLevel.MENTOR){
+            } else if (account.getAccessLevel() == AccessLevel.MENTOR) {
                 httpExchange.getResponseHeaders().add("Location", "/mentor/profile");
             }
-
-
-        } catch (NoSuchElementException e) {
+        }
+        else{
             httpExchange.getResponseHeaders().add("Location", "/");
         }
         httpExchange.sendResponseHeaders(303, 0);
