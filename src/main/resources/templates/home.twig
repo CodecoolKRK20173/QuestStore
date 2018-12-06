@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Home - Quest Store</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../static/css/home.css">
+    </head>
+    <body>
+        <wrapper>
+            <header>
+                <img id="cc-logo-header" src="../static/img/codecool-logo.png">
+                <h1>Quest Store</h1>
+                <div class="logged-user">
+                    <div class="user-info">
+                        <p>{{userName}}</p>
+                        {% block nickname %}
+                            <div class="horizontal">
+                                "<p>{{userNickname}}</p>"
+                            </div>
+                        {% endblock %}
+                    </div>
+                    <img class="user-avatar" src="../static/img/avatarExample.jpeg">
+                </div>
+            </header>
+            
+            <nav>
+                <ul>
+                    {% block nav %}
+                        <li><a {% block profileBtnClass %}{% endblock %} href="/admin/profile">Profile</a></li>
+                        <li><a {% block mentorsBtnClass %}{% endblock %} href="/admin/mentors">Mentors</a></li>
+                        <li><a {% block classesBtnClass %}{% endblock %} href="/admin/classes">Classes</a></li>
+                        <li><a {% block levelsBtnClass %}{% endblock %} href="/admin/levels">Levels</a></li>
+                        <li><a href="/">Log out</a></li>
+                    {% endblock %}
+                </ul>
+            </nav>
+            <content>
+                {% block content %}
+                {% endblock %}
+            </content>
+            <footer>
+                <p>2018 &copy; Radian & Ferned</p>
+            </footer>
+        </wrapper>   
+    </body>
+</html>

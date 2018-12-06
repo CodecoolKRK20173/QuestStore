@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Home - Quest Store</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/home.css">
+        <link rel="stylesheet" href="css/profile.css">
+    </head>
+    <body>
+        <wrapper>
+            <header>
+                <img id="cc-logo-header" src="img/codecool-logo.png">
+                <h1>Quest Store</h1>
+                <div class="logged-user">
+                    <div class="user-info">
+                        <p>Agata Niewiadomska</p>
+                        <div class="horizontal">
+                            "<p>CSS Destroyer</p>"
+                        </div>
+                        <button onclick="becomeAdmin()">I'm an admin!</button>
+                        <button onclick="becomeMentor()">I'm a mentor!</button>
+                        <button onclick="becomeCodecooler()">I'm a codecooler!</button>
+                    </div>
+                    <img class="user-avatar" src="img/43594-O3RK5Y%20%5Bwww.imagesplitter.net%5D-0-0.jpeg">
+                </div>
+            </header>
+            <nav id="codecooler-nav" class="nav">
+                <ul>
+                    <li><a href="profile.html"  target="content-iframe"class="active">Profile</a></li>
+                    <li><a href="#">My Wallet</a></li>
+                    <li><a href="store.html"  target="content-iframe">Shop</a></li>
+                    <li><a href="index.html">Log Out</a></li>
+                </ul>
+            </nav>
+            <nav id="mentor-nav" class="nav">
+                <ul>
+                    <li><a href="profile.html"  target="content-iframe" class="active">Profile</a></li>
+                    <li><a href="#">Students</a></li>
+                    <li><a href="#">Edit Store</a></li>
+                    <li><a href="#">Edit Quests</a></li>
+                    <li><a href="index.html">Log Out</a></li>
+                </ul>
+            </nav>
+            <nav id="admin-nav" class="nav">
+                <ul>
+                    <li><a href="#"  class="active">Profile</a></li>
+                    <li><a href="users-list.html">Mentors</a></li>
+                    <li><a href="#">Classess</a></li>
+                    <li><a href="#">Edit Levels</a></li>
+                    <li><a href="index.html">Log Out</a></li>
+                </ul>
+            </nav>
+            <content>
+                
+        <profile>
+            <div class="logged-user">
+                <div class="user-info">
+                    <p class="name">Agata Niewiadomska</p>
+                    <div id="nickname" class="horizontal">
+                        <p>"</p><p id="title">CSS Destroyer</p><p>"</p>
+                    </div>
+                    
+                    <input type="text" id="nickname-input">
+                    <button id="edit-nickname-button" onclick="changeNickname()">Edit nickname</button>
+                    <button onclick="togglePasswordInputs()">Change password</button>
+                    <br>
+                    <p>Codecooler in WEB Room</p>
+                    <p><strong>Team:</strong> SpecDevs3000</p><br>
+                    <p><strong>Level:</strong> Pro</p>
+                    <p><strong>Balance:</strong> 44 CC</p>
+                </div>
+                <div>
+                    <img class="user-avatar" src="img/43594-O3RK5Y%20%5Bwww.imagesplitter.net%5D-0-0.jpeg">
+                </div>
+            </div>
+            
+            <div id="change-password">
+                <form class="column" onsubmit="changePassword()">
+                    <p>Enter password:</p>
+                    <input type="password">
+                    <p>Enter new password:</p>
+                    <input type="password">
+                    <p>Enter new password again:</p>
+                    <input type="password"><br>
+                    <input type="submit" value="Save changes">
+                </form>
+            </div>
+        </profile>
+        <script src="js/profile.js"></script>
+            </content>
+            <footer>
+                <p>2018 Made by Radian&Ferned</p>
+            </footer>
+            
+            <script src="js/home.js"></script>
+        </wrapper>   
+    </body>
+</html>

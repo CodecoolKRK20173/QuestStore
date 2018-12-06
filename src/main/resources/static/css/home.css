@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    min-height: 100vh;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: #afceff;
+}
+
+wrapper{
+    height: auto;
+    padding: 0 15px;
+    min-height: 100%;
+    max-width: 1024px;
+    display: flex;
+    flex-direction: column;
+    background-color: #afceff;
+}
+
+header{
+    margin: 15px 0;
+    padding: 0 15px;
+    min-height: 10vh;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #eee;
+}
+
+#cc-logo-header{
+    margin-right: 10px;
+}
+
+header h1{
+    margin-left: auto;
+}
+
+header .logged-user{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    min-width: 280px;
+    margin-left: auto;
+}
+
+.user-info{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-info p{
+    margin-bottom: 5px;
+}
+
+.user-info a{
+    margin: auto 0 10px 0;
+    align-self: flex-end;
+}
+
+#cc-logo-header{
+    height: 80px;
+}
+
+header .user-avatar{
+    width: 80px;
+    height: 100px;
+    padding: 10px 0 10px 10px;
+}
+
+nav {
+    margin: 15px 0;
+}
+
+nav ul{
+    display: flex;
+    list-style: none;
+    border-radius: 10px;
+    background-color: blue;
+    overflow: hidden;
+    color: white;
+}
+
+nav ul li{
+    flex-grow: 1;
+}
+
+nav a{
+    display: block;
+    height: 35px;
+    line-height: 35px;
+    background-color: #4A9ACB;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    border: 1px solid #afceff;
+}
+
+nav a:hover{
+    background-color: #D94140;
+}
+
+.active{
+    background-color: #D94140;
+}
+
+content{
+    margin: 15px 0;
+    padding: 15px;
+    min-height: 50vh;
+    border-radius: 15px;
+    background-color: #eee;
+    flex: 1 0 auto;
+}
+
+footer{
+    margin-top: auto;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 10px;
+    background-color: #4A9ACB;
+    border-radius: 15px;
+    flex-shrink: 0;
+    text-align: center;
+    color: white;
+}
+
+.horizontal{
+    display: flex;
+}

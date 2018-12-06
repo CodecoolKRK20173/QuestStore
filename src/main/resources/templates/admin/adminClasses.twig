@@ -1,0 +1,26 @@
+{% extends "../home.twig" %}
+
+{% block nickname %}{% endblock %}
+
+{% block classesBtnClass %}class="active"{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="../static/css/list.css">
+    <list>
+        <form class="search-bar">
+            <p>Search by name:</p>
+            <input type="text"><br>
+            <input type="submit" value="Search">
+        </form>
+        <div class="list">
+            <a class="list-node" href="/admin/addClass">
+                <p>  +  Add new class</p>
+            </a>
+            {% for class in classes %}
+                <div class="list-node mentor">
+                    <p>{{class.getName()}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </list>
+{% endblock %}

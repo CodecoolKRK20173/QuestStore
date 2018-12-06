@@ -1,0 +1,21 @@
+{% extends "../home.twig" %}
+
+{% block nickname %}
+    <div class="horizontal">
+        <p>{{userNickname}}</p>
+    </div>
+{% endblock %}
+
+{% block nav %}
+    <li><a {% block profileBtnClass %}{% endblock %} href="/mentor/profile">Profile</a></li>
+    <li><a {% block mentorsBtnClass %}{% endblock %} href="/mentor/profile">Students</a></li>
+    <li><a {% block classesBtnClass %}{% endblock %} href="/mentor/profile">Edit Store</a></li>
+    <li><a {% block levelsBtnClass %}{% endblock %} href="/mentor/profile">Edit quests</a></li>
+    <li><a href="/">Log out</a></li>
+{% endblock %}
+
+{% block profileBtnClass %}class="active"{% endblock %}
+
+{% block content %}
+    I'm a great mentor!
+{% endblock %}

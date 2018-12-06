@@ -1,0 +1,44 @@
+{% extends "../home.twig" %}
+
+{% block nickname %}{% endblock %}
+
+{% block profileBtnClass %}class="active"{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="../static/css/profile.css">
+    <profile>
+        <div class="logged-user">
+            <div class="user-info">
+                <p class="name">{{nickname}}</p>
+                <div id="nickname" class="horizontal">
+                    <p>"</p><p id="title">CSS Destroyer</p><p>"</p>
+                </div>
+
+                <input type="text" id="nickname-input">
+                <button id="edit-nickname-button" onclick="changeNickname()">Edit nickname</button>
+                <button onclick="togglePasswordInputs()">Change password</button>
+                <br>
+                <p>Codecooler in WEB Room</p>
+                <p><strong>Team:</strong> SpecDevs3000</p><br>
+                <p><strong>Level:</strong> Pro</p>
+                <p><strong>Balance:</strong> 44 CC</p>
+            </div>
+            <div>
+                <img class="user-avatar" src="../static/img/avatarExample.jpeg">
+            </div>
+        </div>
+
+        <div id="change-password">
+            <form class="column" onsubmit="changePassword()">
+                <p>Enter password:</p>
+                <input type="password">
+                <p>Enter new password:</p>
+                <input type="password">
+                <p>Enter new password again:</p>
+                <input type="password"><br>
+                <input type="submit" value="Save changes">
+            </form>
+        </div>
+    </profile>
+    <script src="../static/js/profile.js"></script>
+{% endblock %}

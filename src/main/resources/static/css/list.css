@@ -1,0 +1,39 @@
+list{
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    line-height: 10px;
+}
+
+list p{
+    line-height: 5vh;
+}
+
+.search-bar{
+    
+}
+
+.search-bar input{
+    margin-bottom: 10px;
+}
+
+.list-node{
+    border: 1px solid;
+    border-radius: 15px;
+    height: 5vh;
+    margin: 5px 0;
+    padding: 0px 15px 0px 15px;
+    display: block;
+    color: white;
+    background-color: #4A9ACB;
+    width: 80%;
+}
+
+.list a{
+    width: 30%;
+}
+
+.list-node:hover{
+    background-color: #D94140;
+    cursor: pointer;
+}
