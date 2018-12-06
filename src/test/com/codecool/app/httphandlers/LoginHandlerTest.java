@@ -24,7 +24,6 @@ public class LoginHandlerTest {
     private String loginPageAdress = "/";
     private String adminPageAdress = "/admin/profile";
     private String returnedRedirectLocation;
-    private int returnedResponseCode;
     private CookieHelper cookieHelper;
     private LoginHandler loginHandler;
     private HttpExchange httpExchange;
@@ -60,14 +59,6 @@ public class LoginHandlerTest {
     }
 
     @Test
-    public void testSetID() throws IOException {
-        when(myDao.getAccountByNicknameAndPassword(testUsername,testPassword)).thenReturn(testAccount);
-        testAccount.setId(1);
-        loginHandler.handle(httpExchange);
-        Assertions.assertEquals(1, testAccount.getId());
-    }
-
-    @Test
     public void testCookiesWithUpdateAccount() throws IOException {
         String newUsername = "testLogin2";
         String newPassword = "testPassword2";
@@ -86,6 +77,29 @@ public class LoginHandlerTest {
         loginHandler.handle(httpExchange);
         returnedRedirectLocation = httpExchange.getResponseHeaders().get("Location").get(0);
         Assertions.assertEquals(adminPageAdress, returnedRedirectLocation);
+    }
+
+    // my tests shows that account ID changes after account update, need to check if we can still login to admin pages //
+    @Test
+    public void testRedirectionWithUpdatedAccount() throws IOException {
+        String newUsername = "testLogin2";
+        String newPassword = "testPassword2";
+        Account secondUsername = new Account(newUsername, newPassword);
+        when(myDao.getAccountByNicknameAndPassword(testUsername,testPassword)).thenReturn(testAccount);
+        testAccount.setId(1);
+        myDao.updateAccount(1, secondUsername);
+        loginHandler.handle(httpExchange);
+        returnedRedirectLocation = httpExchange.getResponseHeaders().get("Location").get(0);
+        Assertions.assertEquals(adminPageAdress, returnedRedirectLocation);
+    }
+
+    @Test
+    public void testRedirectingBackToLoginPageWhenNoAdminPrivileges() throws IOException {
+        Account newAccount = new Account("testLogin3", "testPassword3");
+        when(myDao.getAccountByNicknameAndPassword(testUsername,testPassword)).thenReturn(newAccount);
+        loginHandler.handle(httpExchange);
+        returnedRedirectLocation = httpExchange.getResponseHeaders().get("Location").get(0);
+        Assertions.assertEquals(loginPageAdress, returnedRedirectLocation);
     }
 
 }
