@@ -30,6 +30,7 @@ public class TestAdminDaoSQL {
     }
 
 
+<<<<<<< HEAD
     @Test
     public void testSQLException() {
         DAOMentorsSQL testAdminDaoSQL = new DAOMentorsSQL();
@@ -37,4 +38,6 @@ public class TestAdminDaoSQL {
         testAdminDaoSQL.connection = connection;
 
     }
+=======
+>>>>>>> 15268aa71b59dc9408609d6d375e420a9c99ada2
 }
